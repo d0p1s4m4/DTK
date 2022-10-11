@@ -27,10 +27,10 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include "dtk/application.h"
 #include <stdlib.h>
 #include <stdio.h>
 #include <X11/Xlib.h>
+#include <dtk/application.h>
 
 DtkApplication *
 dtk_application_new(int argc, char **argv)

@@ -34,5 +34,6 @@
 # include <dtk/widget.h>
 
 DtkWidget *dtk_window_new(DtkApplication *app);
+DtkWidget *dtk_window_new_with_title(DtkApplication *app, char const *title);
 
 #endif /* !DTK_WINDOW_H */

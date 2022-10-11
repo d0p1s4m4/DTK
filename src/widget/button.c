@@ -27,40 +27,9 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include <X11/Xlib.h>
-#include <stdlib.h>
-#include <dtk/window.h>
+#include <dtk/widget/button.h>
 
-DtkWidget *
-dtk_window_new(DtkApplication *app)
+DtkWidget *dtk_button_new(void)
 {
-	DtkWidget *window;
-
-	window = (DtkWidget *)malloc(sizeof(DtkWidget));
-	if (window == NULL)
-	{
-		/* TODO: logging system */
-		return (NULL);
-	}
-
-	window->win = XCreateSimpleWindow(app->display, DefaultRootWindow(app->display), 0, 0, 640, 480, 2, 0, 0);
-
-	app->windows = window;
-    return (window);
-}
-
-DtkWidget *
-dtk_window_new_with_title(DtkApplication *app, char const *title)
-{
-	DtkWidget *window;
-
-	window = dtk_window_new(app);
-	if (window == NULL)
-	{
-		return (NULL);
-	}
-
-	XStoreName(app->display, window->win, title);
-
-	return (window);
+	return (NULL);
 }

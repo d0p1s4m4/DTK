@@ -1,6 +1,6 @@
 AC_INIT([DTK],[0.1],[contact@d0p1.eu])
 
-AM_INIT_AUTOMAKE([foreign])
+AM_INIT_AUTOMAKE([foreign subdir-objects])
 AC_LANG(C)
 AC_PROG_CC
 AC_PROG_INSTALL

@@ -27,6 +27,7 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+#include "dtk/application.h"
 #include <dtk/window.h>
 #include <stdlib.h>
 
@@ -34,6 +35,7 @@ int
 main(int argc, char **argv)
 {
 	DtkApplication *app;
+	DtkWidget *main_window;
 
 	app = dtk_application_new(argc, argv);
 	if (app == NULL)
@@ -41,7 +43,12 @@ main(int argc, char **argv)
 		return (EXIT_FAILURE);
 	}
 
-	dtk_window_new(app);
+	main_window = dtk_window_new_with_title(app, "Hello, DTK");
+	if (main_window == NULL)
+	{
+		dtk_application_destroy(app);
+		return (EXIT_FAILURE);
+	}
 
 	dtk_application_run(app);
 
