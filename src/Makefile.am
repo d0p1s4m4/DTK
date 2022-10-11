@@ -1,4 +1,4 @@
-AM_CFLAGS = -I$(srcdir)/../include
+AM_CPPFLAGS = -I$(srcdir)/../include
 
 noinst_LIBRARIES = libdtk.a
-libdtk_a_SOURCES = application.c
+libdtk_a_SOURCES = application.c window.c
