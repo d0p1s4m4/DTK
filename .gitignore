@@ -58,3 +58,4 @@ Makefile
 *.o
 
 /example/hello
+/include/dtk/config.h

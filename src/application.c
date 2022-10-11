@@ -29,6 +29,7 @@
 
 #include <stdlib.h>
 #include <stdio.h>
+#include <string.h>
 #include <X11/Xlib.h>
 #include <dtk/application.h>
 
@@ -55,6 +56,8 @@ dtk_application_new(int argc, char **argv)
 		return (NULL);
 	}
 
+	memset(&app->children, 0, sizeof(DtkWidgetVector));
+
 	return (app);
 }
 
@@ -62,8 +65,12 @@ void
 dtk_application_run(DtkApplication *app)
 {
 	XEvent evt;
+	int idx;
 
-	XMapWindow(app->display, app->windows->win); /* TODO: iterate over all windows */
+	for (idx = 0; idx < app->children.total; idx++)
+	{
+		XMapWindow(app->display, app->children.widget[idx]->handle);
+	}
 
 	while (1)
 	{
@@ -81,6 +88,12 @@ dtk_application_run(DtkApplication *app)
 void
 dtk_application_destroy(DtkApplication *app)
 {
+	int idx;
+
+	for (idx = 0; idx < app->children.total; idx++)
+	{
+		XDestroyWindow(app->display, app->children.widget[idx]->handle);
+	}
 	if (app->display != NULL)
 	{
 		XCloseDisplay(app->display);

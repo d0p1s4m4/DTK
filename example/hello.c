@@ -36,6 +36,7 @@ main(int argc, char **argv)
 {
 	DtkApplication *app;
 	DtkWidget *main_window;
+	DtkWidget *alt_window;
 
 	app = dtk_application_new(argc, argv);
 	if (app == NULL)
@@ -45,6 +46,13 @@ main(int argc, char **argv)
 
 	main_window = dtk_window_new_with_title(app, "Hello, DTK");
 	if (main_window == NULL)
+	{
+		dtk_application_destroy(app);
+		return (EXIT_FAILURE);
+	}
+	
+	alt_window = dtk_window_new_with_title(app, "Hello, World");
+	if (alt_window == NULL)
 	{
 		dtk_application_destroy(app);
 		return (EXIT_FAILURE);

@@ -27,15 +27,18 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include <stdlib.h>
-#include <dtk/widget/button.h>
+#ifndef DTK_UTILS_VECTOR_H
+# define DTK_UTILS_VECTOR_H 1
 
-DtkWidget *dtk_button_new(void)
-{
-	return (NULL);
-}
+struct _dtk_widget;
 
-DtkWidget *dtk_button_new_with_label(char const *label)
+typedef struct _dtk_widget_vector
 {
-	return (NULL);
-}
+	int capacity;
+	int total;
+	struct _dtk_widget **widget;
+} DtkWidgetVector;
+
+void dtk_widget_vector_push(DtkWidgetVector *vector, struct _dtk_widget *widget);
+
+#endif /* !DTK_UTILS_VECTOR_H */

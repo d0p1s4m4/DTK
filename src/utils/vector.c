@@ -28,14 +28,33 @@
  */
 
 #include <stdlib.h>
-#include <dtk/widget/button.h>
+#include <dtk/widget.h>
 
-DtkWidget *dtk_button_new(void)
+void
+dtk_widget_vector_push(DtkWidgetVector *vector, DtkWidget *widget)
 {
-	return (NULL);
-}
+	DtkWidget **ptr;
+	int capacity;
 
-DtkWidget *dtk_button_new_with_label(char const *label)
-{
-	return (NULL);
+	if (vector->capacity < (vector->total + 1))
+	{
+		if (vector->capacity == 0)
+		{
+			capacity = 1;
+		}
+		else
+		{
+			capacity = vector->capacity * 2;
+		}
+
+		ptr = realloc(vector->widget, capacity * sizeof(DtkWidget *));
+		if (ptr == NULL)
+		{
+			return; /* fuck */
+		}
+
+		vector->widget = ptr;
+		vector->capacity = capacity;
+	}
+	vector->widget[vector->total++] = widget;
 }

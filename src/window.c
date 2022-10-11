@@ -43,9 +43,11 @@ dtk_window_new(DtkApplication *app)
 		return (NULL);
 	}
 
-	window->win = XCreateSimpleWindow(app->display, DefaultRootWindow(app->display), 0, 0, 640, 480, 2, 0, 0);
+	window->handle = XCreateSimpleWindow(app->display, DefaultRootWindow(app->display), 0, 0, 640, 480, 2, 0, 0);
+	window->app = app;
+	window->parent = NULL;
 
-	app->windows = window;
+	dtk_widget_vector_push(&app->children, window);
     return (window);
 }
 
@@ -60,7 +62,7 @@ dtk_window_new_with_title(DtkApplication *app, char const *title)
 		return (NULL);
 	}
 
-	XStoreName(app->display, window->win, title);
+	XStoreName(app->display, window->handle, title);
 
 	return (window);
 }

@@ -32,11 +32,12 @@
 
 # include <X11/Xlib.h>
 # include <dtk/widget.h>
+# include <dtk/utils/vector.h>
 
-typedef struct
+typedef struct _dtk_application
 {
 	Display *display;
-	DtkWidget *windows;
+	DtkWidgetVector children;
 } DtkApplication;
 
 DtkApplication *dtk_application_new(int argc, char **argv);

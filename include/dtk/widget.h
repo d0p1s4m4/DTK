@@ -31,10 +31,18 @@
 # define DTK_WIDGET_H 1
 
 # include <X11/Xlib.h>
+# include <dtk/utils/vector.h>
 
-typedef struct
+struct _dtk_application;
+struct _dtk_widget_vector;
+
+typedef struct _dtk_widget
 {
-	Window win;
+	Window handle;
+
+	struct _dtk_application *app;
+	struct _dtk_widget *parent;
+	struct _dtk_widget_vector children;
 } DtkWidget;
 
 #endif /* !DTK_WIDGET_H */
