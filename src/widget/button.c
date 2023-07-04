@@ -27,15 +27,51 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+#include "dtk/widget.h"
+#include <X11/Xlib.h>
 #include <stdlib.h>
+#include <stdio.h>
 #include <dtk/widget/button.h>
+#include <dtk/application.h>
 
-DtkWidget *dtk_button_new(void)
+DtkWidget *
+dtk_button_new(DtkWidget *parent)
 {
-	return (NULL);
+	DtkButton *button;
+
+	button = (DtkButton *)malloc(sizeof(DtkButton));
+	if (button == NULL)
+	{
+		return (NULL);
+	}
+
+	button->widget.app = parent->app;
+	button->widget.parent = parent->parent;
+
+	button->widget.handle = XCreateSimpleWindow(
+		parent->app->display, parent->handle, 10, 10, 100, 20, 2, 0, 120);
+	if (!button->widget.handle)
+	{
+		fprintf(stderr, "Unable to create subwindows");
+		return (NULL);
+	}
+
+	XMapWindow(parent->app->display, button->widget.handle); /* XXX: */
+
+	return ((DtkWidget *)button);
 }
 
-DtkWidget *dtk_button_new_with_label(char const *label)
+DtkWidget *
+dtk_button_new_with_label(DtkWidget *parent, char const *label)
 {
-	return (NULL);
+	DtkButton *button;
+
+	button = (DtkButton *)dtk_button_new(parent);
+	if (button == NULL)
+	{
+		return (NULL);
+	}
+
+	(void)label;
+	return ((DtkWidget *)button);
 }

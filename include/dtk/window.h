@@ -35,5 +35,7 @@
 
 DtkWidget *dtk_window_new(DtkApplication *app);
 DtkWidget *dtk_window_new_with_title(DtkApplication *app, char const *title);
+void dtk_window_resize(DtkWidget *win, size_t width, size_t height);
+void dtk_window_set_title(DtkWidget *win, char const *title);
 
 #endif /* !DTK_WINDOW_H */

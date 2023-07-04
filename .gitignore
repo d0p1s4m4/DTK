@@ -59,3 +59,5 @@ Makefile
 
 /example/hello
 /include/dtk/config.h
+
+/build

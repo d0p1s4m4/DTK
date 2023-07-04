@@ -32,11 +32,17 @@
 
 # include <dtk/widget.h>
 
+typedef void (*Callback)(void *);
+
 typedef struct
 {
 	DtkWidget widget;
+
+	char *text;
+	Callback onClick;
 } DtkButton;
 
-DtkWidget *dtk_button_new(void);
+DtkWidget *dtk_button_new(DtkWidget *parent);
+DtkWidget *dtk_button_new_with_label(DtkWidget *parent, char const *label);
 
 #endif /* !DTK_WIDGET_BUTTON_H */

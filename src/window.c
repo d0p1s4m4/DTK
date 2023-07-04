@@ -27,6 +27,7 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+#include "dtk/widget.h"
 #include <X11/Xlib.h>
 #include <stdlib.h>
 #include <dtk/window.h>
@@ -35,6 +36,9 @@ DtkWidget *
 dtk_window_new(DtkApplication *app)
 {
 	DtkWidget *window;
+	int screen;
+	unsigned int background;
+	unsigned int border;
 
 	window = (DtkWidget *)malloc(sizeof(DtkWidget));
 	if (window == NULL)
@@ -43,7 +47,13 @@ dtk_window_new(DtkApplication *app)
 		return (NULL);
 	}
 
-	window->handle = XCreateSimpleWindow(app->display, DefaultRootWindow(app->display), 0, 0, 640, 480, 2, 0, 0);
+	screen = DefaultScreen(app->display);
+	background = BlackPixel(app->display, screen);
+	border = WhitePixel(app->display, screen);
+ 
+	window->handle = XCreateSimpleWindow(
+		app->display, DefaultRootWindow(app->display), 0, 0, 640, 480, 2, 
+		border, background);
 	window->app = app;
 	window->parent = NULL;
 
@@ -65,4 +75,16 @@ dtk_window_new_with_title(DtkApplication *app, char const *title)
 	XStoreName(app->display, window->handle, title);
 
 	return (window);
+}
+
+void
+dtk_window_resize(DtkWidget *win, size_t width, size_t height)
+{
+	XResizeWindow(win->app->display, win->handle, width, height);
+}
+
+void
+dtk_window_set_title(DtkWidget *win, char const *title)
+{
+	XStoreName(win->app->display, win->handle, title);
 }

@@ -28,6 +28,7 @@
  */
 
 #include "dtk/application.h"
+#include "dtk/widget/button.h"
 #include <dtk/window.h>
 #include <stdlib.h>
 
@@ -57,6 +58,8 @@ main(int argc, char **argv)
 		dtk_application_destroy(app);
 		return (EXIT_FAILURE);
 	}
+
+	dtk_button_new(main_window);
 
 	dtk_application_run(app);
 
